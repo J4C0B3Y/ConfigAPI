@@ -12,7 +12,7 @@ plugins {
 object Project {
     const val NAME = "ConfigAPI"
     const val GROUP = "net.j4c0b3y"
-    const val VERSION = "1.2.6"
+    const val VERSION = "1.2.7"
 }
 
 allprojects {
