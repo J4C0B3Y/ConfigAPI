@@ -6,6 +6,7 @@ import net.j4c0b3y.api.config.provider.TypeProvider;
 import net.j4c0b3y.api.config.provider.impl.MapProvider;
 import net.j4c0b3y.api.config.resolver.TypeResolver;
 import net.j4c0b3y.api.config.utils.ClassUtils;
+import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
@@ -34,6 +35,10 @@ public class MapResolver implements TypeResolver {
         // If the map key generic is not a string, return.
         Type[] generics = ClassUtils.getGenerics(field);
         if (!generics[0].equals(String.class)) return null;
+
+        if (generics[1] instanceof ParameterizedTypeImpl) {
+            throw new IllegalArgumentException("Invalid type for '" + field.getName() + "', nested map?");
+        }
 
         // Create a new map provider for the specified type.
         return (TypeProvider<T>) resolve((Class<?>) generics[1]);
