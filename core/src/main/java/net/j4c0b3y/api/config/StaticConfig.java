@@ -282,7 +282,10 @@ public abstract class StaticConfig {
      * @param path The current path.
      */
     private void step(String path) throws ReflectiveOperationException {
-        for (AnnotatedElement member : sections.get(path)) {
+        Set<AnnotatedElement> members = this.sections.get(path);
+        if (members == null) return;
+
+        for (AnnotatedElement member : members) {
             String route = getRoute(member, path);
 
             if (member instanceof Field) {
