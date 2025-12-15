@@ -63,7 +63,7 @@ public abstract class StaticConfig {
     /**
      * A map of relocation replacements to their target paths.
      */
-    private final Map<String, List<String>> relocations = new HashMap<>();
+    private final Map<String, List<String>> relocations = new LinkedHashMap<>();
 
     /**
      * A map of custom comments to add to fields.
